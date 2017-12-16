@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
-import './App.css';
 
 class App extends Component {
   state = {
-    students: 23
+    students: 10
   };
 
   handleInput = e => {
@@ -12,26 +11,42 @@ class App extends Component {
     });
   }
 
+  changeNumber = e => {
+    const name = e.target.name;
+
+    const newNumber = this.state.students + (name === 'plus' ? 1 : -1)
+
+    this.setState({
+      students: newNumber
+    });
+  }
+
   render() {
     const {students} = this.state;
+    const result = percentaged(1-multi(365, students) / (365 ** students), 2);
 
     return (
       <div className="App">
+        <h1>Birthday problem</h1>
         <p>
+          <button className="change-count" name="minus" onClick={this.changeNumber}>
+            -
+          </button>
           <input
             type="number"
             value={students}
             onChange={this.handleInput}
             />
+          <button className="change-count" name="plus" onClick={this.changeNumber}>+</button>
         </p>
-        <p>{ percentaged(1-multi(365, students) / (365 ** students), 2)}&nbsp;%</p>
+        <p className="result">{(students <= 365 && result === 100) && 'almost '}{ result }&nbsp;%</p>
       </div>
     );
   }
 }
 
 const multi = (a, b) => (
-  a === 365 - b ? 1 : a * multi(a-1, b)
+  (a === 365 - b || b >= 100) ? 1 : a * multi(a-1, b)
 )
 
 const percentaged = (number, dec) => (
