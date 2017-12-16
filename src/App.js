@@ -6,8 +6,12 @@ class App extends Component {
   };
 
   handleInput = e => {
+    const value = e.target.value;
+
+    const newValue = value < 1 ? 1: value;
+
     this.setState({
-      students: e.target.value
+      students: newValue
     });
   }
 
@@ -23,11 +27,12 @@ class App extends Component {
 
   render() {
     const {students} = this.state;
-    const result = percentaged(1-multi(365, students) / (365 ** students), 2);
+    const result = percentaged(1-multi(366, students) / (366 ** students), 2);
 
     return (
       <div className="App">
         <h1>Birthday problem</h1>
+        <h2>Number of people</h2>
         <p>
           <button className="change-count" name="minus" onClick={this.changeNumber}>
             -
@@ -39,14 +44,15 @@ class App extends Component {
             />
           <button className="change-count" name="plus" onClick={this.changeNumber}>+</button>
         </p>
-        <p className="result">{(students <= 365 && result === 100) && 'almost '}{ result }&nbsp;%</p>
+        <p className="result">{(students <= 366 && result === 100) && 'almost '}{ result }&nbsp;%</p>
+        <p><a href="https://en.wikipedia.org/wiki/Birthday_problem">Wiki</a></p>
       </div>
     );
   }
 }
 
 const multi = (a, b) => (
-  (a === 365 - b || b >= 100) ? 1 : a * multi(a-1, b)
+  (a === 366 - b || b >= 100) ? 1 : a * multi(a-1, b)
 )
 
 const percentaged = (number, dec) => (

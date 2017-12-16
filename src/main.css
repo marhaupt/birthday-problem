@@ -6,15 +6,17 @@ body {
   margin: 0;
   padding: 0;
   font-family: sans-serif;
+  color: #222;
+  background-color: #fbfbfb;
 }
 
 .App {
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 60vh;
+  min-height: 70vh;
   flex-direction: column;
-  padding: 1rem;
+  padding: 1rem 2.5rem;
   box-sizing: border-box;
 }
 
@@ -31,10 +33,15 @@ input[type="number"] {
 
 h1 {
   text-align: center;
-  font-size: 2rem;
+  font-size: 1.8rem;
   margin: 1rem 0;
   font-weight: normal;
   font-style: italic;
+}
+
+h2 {
+  font-size: 1.3rem;
+  margin: 1rem 0 0 0;
 }
 
 .change-count {
@@ -44,17 +51,31 @@ h1 {
   border-radius: 50%;
   border: none;
   background-color: #d24343;
-  color: #f0f0f0;
+  color: #fbfbfb;
   display: inline-flex;
   justify-content: center;
   align-items: center;
   margin: 0 1rem;
   box-shadow: 1px 1px 5px rgba(105,105,105,.5);
   transition: all 150ms cubic-bezier(0.47, 1.36, 0.79, 1.34);
+  user-select: none;
 }
 
 .change-count:focus {
   outline: none;
   box-shadow: 1px 1px 15px rgba(105,105,105,.7);
   transform: scale(1.5);
+}
+
+a {
+  font-size: 1.2rem;
+  color: #d24343;
+  text-decoration: none;
+  border-bottom: 0.1rem solid #d24343;
+  transition: all 150ms ease-in-out;
+}
+
+a:hover {
+  color: #222;
+  border-bottom-color: transparent;
 }
