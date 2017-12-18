@@ -27,7 +27,7 @@ class App extends Component {
 
   render() {
     const { students } = this.state;
-    const result = percentaged(1 - multi(366, students) / 366 ** students, 2);
+    const result = percentaged(1 - multi(students) / 366 ** students, 2);
 
     return (
       <div className="App">
@@ -62,7 +62,8 @@ class App extends Component {
   }
 }
 
-const multi = (a, b) => (a === 366 - b || b >= 100 ? 1 : a * multi(a - 1, b));
+const multi = (people, days = 366) =>
+  days === 366 - people || people >= 100 ? 1 : days * multi(people, days - 1);
 
 const percentaged = (number, dec) =>
   Math.round(100 * number * 10 ** dec) / 10 ** dec;
